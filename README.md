@@ -7,3 +7,8 @@ uv init
 uv sync
 ```
 
+```bash
+uv pip install easyocr
+
+```
+
