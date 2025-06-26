@@ -4,6 +4,8 @@ TextData 클래스
 - OCR 텍스트 및 좌표 정보를 저장
 - 번역된 텍스트(tr_text)와 원본 위치정보(position) 관리
 """
+
+
 class TextData:
     def __init__(self, text, position):
         self.__text = text
@@ -15,6 +17,11 @@ class TextData:
         self.__tr_text = tr_text
         self.__position_info = position
 
-    def get_text(self): return self.__text
-    def get_position_info(self): return self.__position_info
-    def get_tr_text(self): return self.__tr_text
+    def get_text(self):
+        return self.__text
+
+    def get_position_info(self):
+        return self.__position_info
+
+    def get_tr_text(self):
+        return self.__tr_text

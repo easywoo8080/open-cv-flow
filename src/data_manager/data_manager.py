@@ -16,6 +16,13 @@ class DataManager:
     folder_data = None
     easyocr_reader = None
 
+
+    @staticmethod
+    def file_exists(path):
+        """파일 존재 여부 확인"""
+        return os.path.exists(path)
+    
+    
     @classmethod
     def init(cls):
         """기본 이미지 폴더 초기화 및 easyocr 모델 로딩"""
@@ -36,15 +43,21 @@ class DataManager:
         """출력 폴더 생성 및 이미지 복사"""
         output_folder = os.path.join(target_folder, '__OUTPUT_FILES__')
         os.makedirs(output_folder, exist_ok=True)
-        for f in cls.folder_data.get_files():
-            out_path = os.path.join(output_folder, os.path.basename(f.get_file_name()))
-            if not os.path.exists(out_path):
-                shutil.copy(f.get_file_name(), out_path)
+        if cls.folder_data is not None:
+            for f in cls.folder_data.get_files():
+                out_path = os.path.join(output_folder, os.path.basename(f.get_file_name()))
+                if not os.path.exists(out_path):
+                    shutil.copy(f.get_file_name(), out_path)
 
     @classmethod
-    def get_work_file(cls): return cls.folder_data.get_work_file()
+    def get_work_file(cls):
+        if cls.folder_data is not None:
+            return cls.folder_data.get_work_file()
+        return None
     @classmethod
-    def set_work_file(cls, file): cls.folder_data.set_work_file(file)
+    def set_work_file(cls, file):
+        if cls.folder_data is not None:
+            cls.folder_data.set_work_file(file)
 
     @classmethod
     def get_output_file(cls):

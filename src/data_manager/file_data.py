@@ -8,6 +8,7 @@ import numpy
 from .text_data import TextData
 from .face_data import FaceData
 
+
 class FileData:
     def __init__(self, file):
         self.__name = file
@@ -15,13 +16,19 @@ class FileData:
         self.__is_ocr_executed = False
         self.__faces = None
 
-    def get_file_name(self): return self.__name
-    def clear_faces(self): self.__faces = None
-    def get_faces(self): return self.__faces
+    def get_file_name(self):
+        return self.__name
+
+    def clear_faces(self):
+        self.__faces = None
+
+    def get_faces(self):
+        return self.__faces
 
     def get_faces_as_string(self):
         """감지된 얼굴 이름 리스트 반환"""
-        if not self.__faces: return None
+        if not self.__faces:
+            return None
         return [f.get_name() for f in self.__faces]
 
     def set_faces(self, positions):
@@ -30,9 +37,12 @@ class FileData:
         param positions: numpy.ndarray
         """
         if isinstance(positions, numpy.ndarray) and len(positions) > 0:
-            self.__faces = [FaceData(f'얼굴-{i+1:04d}', p) for i, p in enumerate(positions)]
+            self.__faces = [
+                FaceData(f"얼굴-{i+1:04d}", p) for i, p in enumerate(positions)
+            ]
 
-    def is_ocr_executed(self): return self.__is_ocr_executed
+    def is_ocr_executed(self):
+        return self.__is_ocr_executed
 
     def set_texts(self, ocr_texts):
         """
@@ -42,11 +52,20 @@ class FileData:
         self.__texts = [TextData(t[1], t[0]) for t in ocr_texts]
         self.__is_ocr_executed = True
 
-    def get_texts(self): return self.__texts
-    def get_text_by_index(self, index): return self.__texts[index]
-    def get_texts_as_string(self): return [t.get_text() for t in self.__texts]
-    def get_positions_as_string(self): return [t.get_position_info() for t in self.__texts]
-    def get_text_as_string_by_index(self, index): return self.get_texts_as_string()[index]
+    def get_texts(self):
+        return self.__texts
+
+    def get_text_by_index(self, index):
+        return self.__texts[index]
+
+    def get_texts_as_string(self):
+        return [t.get_text() for t in self.__texts]
+
+    def get_positions_as_string(self):
+        return [t.get_position_info() for t in self.__texts]
+
+    def get_text_as_string_by_index(self, index):
+        return self.get_texts_as_string()[index]
 
     def get_rectangle_position_by_texts_index(self, index):
         """
