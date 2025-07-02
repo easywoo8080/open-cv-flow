@@ -97,9 +97,15 @@ class DataManager:
         이미 OCR 수행된 경우 캐시된 텍스트 반환
         """
         index = cls.get_image_index()
-        file = cls.folder_data.get_file_by_index(index)
+        file = cls.folder_data.get_file_by_index(index) if cls.folder_data is not None else None
+        
+        if file is None:
+            mb.showwarning("경고", "파일을 찾을 수 없습니다.")
+            return None
         if file.is_ocr_executed():
             return file.get_texts_as_string()
+        # ...이하 동일...
+        
 
         ocr_result = cls.easyocr_reader.readtext(file.get_file_name())
         file.set_texts(ocr_result)
