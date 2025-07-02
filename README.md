@@ -12,3 +12,8 @@ uv pip install easyocr
 
 ```
 
+[명명 규칙 문서](./docs/style_guides/naming_conventions.md)
+
+
+
+
