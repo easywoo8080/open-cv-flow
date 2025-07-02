@@ -299,16 +299,13 @@ class DataManager:
         return None
 
     @classmethod
-    def get_image_index(cls) -> int:
-        """현재 작업 이미지의 인덱스를 반환한다.
-
-        Returns:
-            int: 0 이상의 인덱스, 찾지 못하면 ``-1``.
-        """
-        current = cls.folder_data.get_work_file()
-        files = cls.folder_data.get_files()
-        for i, f in enumerate(files):
-            if f == current:
+    def get_image_index(cls):
+        print ('[DataManager] get_image_index() called!!...')
+        img_file = cls.folder_data.get_work_file()
+        target_file = cls.folder_data.get_files()
+        
+        for i in range(len(target_file)):
+            if target_file[i] == img_file:
                 return i
         return -1
 
