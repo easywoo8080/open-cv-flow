@@ -8,7 +8,6 @@ import glob
 import os
 from .file_data import FileData
 
-
 class FolderData:
     def __init__(self, path: str):
         self.__folder = path
@@ -17,12 +16,9 @@ class FolderData:
         self.__init_work_folder()
 
     def __init_work_folder(self):
-        FILE_EXT = ["png", "jpg", "gif"]
+        FILE_EXT = ['png', 'jpg', 'gif']
         target_files = []
-        [
-            target_files.extend(glob.glob(self.__folder + "/" + "*." + e))
-            for e in FILE_EXT
-        ]
+        [target_files.extend(glob.glob(self.__folder + '/' + '*.' + e)) for e in FILE_EXT]
         self.__files = [FileData(f) for f in target_files]
 
         if self.__files:
